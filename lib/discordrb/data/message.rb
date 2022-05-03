@@ -67,7 +67,7 @@ module Discordrb
     # @return [Integer, nil] the webhook ID that sent this message, or `nil` if it wasn't sent through a webhook.
     attr_reader :webhook_id
 
-    # @return [Array<Component>]
+    # @return [Array<Component>] all components attached to this message.
     attr_reader :components
 
     # The discriminator that webhook user accounts have.
@@ -368,7 +368,7 @@ module Discordrb
       !@referenced_message.nil?
     end
 
-    # @return [Message, nil] the Message this Message was sent in reply to.
+    # @return [Message, nil] the Message this Message was sent in reply to, or Nil if not a reply.
     def referenced_message
       return @referenced_message if @referenced_message
       return nil unless @message_reference
@@ -377,7 +377,7 @@ module Discordrb
       @referenced_message = referenced_channel.message(@message_reference['message_id'])
     end
 
-    # @return [Array<Components::Button>]
+    # @return [Array<Components::Button>] all buttons attached to this message.
     def buttons
       results = @components.collect do |component|
         case component

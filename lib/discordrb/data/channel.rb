@@ -750,7 +750,7 @@ module Discordrb
       API::Channel.start_typing(@bot.token, @id)
     end
 
-    # Creates a Group channel
+    # Creates a group channel.
     # @param user_ids [Array<Integer>] Array of user IDs to add to the new group channel (Excluding
     #   the recipient of the PM channel).
     # @return [Channel] the created channel.
@@ -792,7 +792,7 @@ module Discordrb
 
     alias_method :remove_group_user, :remove_group_users
 
-    # Leaves the group.
+    # Leaves the group channel.
     def leave_group
       raise 'Attempted to leave a non-group channel!' unless group?
 
@@ -801,7 +801,7 @@ module Discordrb
 
     alias_method :leave, :leave_group
 
-    # Creates a webhook in this channel
+    # Creates a webhook in this channel.
     # @param name [String] the default name of this webhook.
     # @param avatar [String] the default avatar URL to give this webhook.
     # @param reason [String] the reason for the webhook creation.
@@ -860,7 +860,7 @@ module Discordrb
       @bot.join_thread(@id)
     end
 
-    # Leave this thread
+    # Leave this thread.
     def leave_thread
       @bot.leave_thread(@id)
     end

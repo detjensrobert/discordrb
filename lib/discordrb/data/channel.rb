@@ -470,7 +470,7 @@ module Discordrb
       send_message(message, tts, embed, attachments, allowed_mentions, message_reference, components || view.to_a)
     end
 
-    # Sends multiple messages to a channel
+    # Sends multiple messages to this channel.
     # @param content [Array<String>] The messages to send.
     def send_multiple(content)
       content.each { |e| send_message(e) }
@@ -653,7 +653,7 @@ module Discordrb
 
     alias_method :message, :load_message
 
-    # Requests all pinned messages in a channel.
+    # Requests all pinned messages in this channel.
     # @return [Array<Message>] the received messages.
     def pins
       msgs = API::Channel.pinned_messages(@bot.token, @id)
@@ -750,7 +750,7 @@ module Discordrb
       API::Channel.start_typing(@bot.token, @id)
     end
 
-    # Creates a group channel.
+    # Creates a group PM channel from a PM with another user.
     # @param user_ids [Array<Integer>] Array of user IDs to add to the new group channel (Excluding
     #   the recipient of the PM channel).
     # @return [Channel] the created channel.
@@ -865,17 +865,19 @@ module Discordrb
       @bot.leave_thread(@id)
     end
 
-    # Members in the thread.
+    # List of all Members in this thread.
+    # @return [Array<Member>]
     def members
       @bot.thread_members[@id].collect { |id| @server_id ? @bot.member(@server_id, id) : @bot.user(id) }
     end
 
-    # Add a member to the thread
+    # Add a member to this thread.
     # @param member [Member, Integer, String] The member, or ID of the member, to add to this thread.
     def add_member(member)
       @bot.add_thread_member(@id, member)
     end
 
+    # Remove a member from this thread.
     # @param member [Member, Integer, String] The member, or ID of the member, to remove from a thread.
     def remove_member(member)
       @bot.remove_thread_member(@id, member)
@@ -888,7 +890,7 @@ module Discordrb
       "<Channel name=#{@name} id=#{@id} topic=\"#{@topic}\" type=#{@type} position=#{@position} server=#{@server || @server_id}>"
     end
 
-    # Adds a recipient to a group channel.
+    # Adds a recipient to this group channel.
     # @param recipient [Recipient] the recipient to add to the group
     # @raise [ArgumentError] if tried to add a non-recipient
     # @note For internal use only
@@ -900,7 +902,7 @@ module Discordrb
       @recipients << recipient
     end
 
-    # Removes a recipient from a group channel.
+    # Removes a recipient from this group channel.
     # @param recipient [Recipient] the recipient to remove from the group
     # @raise [ArgumentError] if tried to remove a non-recipient
     # @note For internal use only

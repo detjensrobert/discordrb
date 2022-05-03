@@ -76,7 +76,7 @@ module Discordrb
       @client_status = process_client_status(data['client_status'])
     end
 
-    # Get a user's PM channel or send them a PM
+    # Get this user's PM channel or send them a PM
     # @overload pm
     #   Creates a private message channel for this user or returns an existing one if it already exists
     #   @return [Channel] the PM channel to this user.
@@ -97,7 +97,7 @@ module Discordrb
 
     alias_method :dm, :pm
 
-    # Send the user a file.
+    # Send this user a file.
     # @param file [File] The file to send to the user
     # @param caption [String] The caption of the file being sent
     # @param filename [String] Overrides the filename of the uploaded file
